@@ -1,4 +1,4 @@
-name: Run Java GUI
+name: Run Java GUI Program
 
 on: [push]
 
@@ -7,23 +7,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up JDK 21
+      - name: Set Up Java
         uses: actions/setup-java@v3
         with:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Install Xvfb
+      - name: Install Xvfb (Virtual Display)
         run: sudo apt-get install xvfb
 
       - name: Start Virtual Display
         run: Xvfb :99 &
 
-      - name: Set Display Environment
-        run: export DISPLAY=:99
+      - name: Set Display Variable
+        run: echo "DISPLAY=:99" >> $GITHUB_ENV
 
       - name: Compile Java Code
         run: javac Login.java
