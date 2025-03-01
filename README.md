@@ -65,10 +65,13 @@ javac *.java
 ```sh
 java Login
 ```
+---
+
 ## ⚠️ Security Notes
 ### ⚠ Never share private_key.txt – it must remain confidential.
 ### ⚠ Ensure public_key.txt is distributed securely to clients.
 ### ⚠ The system uses SHA-256 hashing & RSA encryption for security.
+---
 
 ## 📜 License & Credits
 ### This project was developed as part of the Applied Cryptography (TAC6223) course. 🚀
