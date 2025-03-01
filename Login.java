@@ -27,28 +27,40 @@ public class Login {
 
         frame.add(panel, BorderLayout.CENTER);
 
-        loginButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                String password = new String(passwordField.getPassword());
+        // Use a named inner class instead of an anonymous inner class
+        loginButton.addActionListener(new LoginButtonListener(frame, usernameField, passwordField));
 
-                if (username.equals("admin") && password.equals("admin123")) {
-                    JOptionPane.showMessageDialog(frame, "Welcome Admin!");
-                    new DigitalSignatureGUI("admin");
-                    frame.dispose();
-
-                } else if (username.equals("client") && password.equals("client123")) {
-                    JOptionPane.showMessageDialog(frame, "Welcome Client!");
-                    new DigitalSignatureGUI("client");
-                    frame.dispose();
-
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Invalid credentials. Please try again.");
-                }
-            }
-        });
-
- 
         frame.setVisible(true);
+    }
+}
+
+// Named inner class for handling login button click
+class LoginButtonListener implements ActionListener {
+    private JFrame frame;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+
+    public LoginButtonListener(JFrame frame, JTextField usernameField, JPasswordField passwordField) {
+        this.frame = frame;
+        this.usernameField = usernameField;
+        this.passwordField = passwordField;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+
+        if (username.equals("admin") && password.equals("admin123")) {
+            JOptionPane.showMessageDialog(frame, "Welcome Admin!");
+            new DigitalSignatureGUI("admin");
+            frame.dispose();
+        } else if (username.equals("client") && password.equals("client123")) {
+            JOptionPane.showMessageDialog(frame, "Welcome Client!");
+            new DigitalSignatureGUI("client");
+            frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(frame, "Invalid credentials. Please try again.");
+        }
     }
 }
