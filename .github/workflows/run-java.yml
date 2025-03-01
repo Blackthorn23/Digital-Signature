@@ -1,0 +1,23 @@
+name: Run Java Login App
+
+on: [push, pull_request]  # Run this workflow when you push code or create a pull request
+
+jobs:
+  run-java:
+    runs-on: ubuntu-latest  # Use an Ubuntu virtual machine
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Get the latest code from GitHub
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'  # Install OpenJDK (Temurin)
+          java-version: '17'  # Use Java 17 (change this if needed)
+
+      - name: Compile Java Code
+        run: javac Login.java  # Compile your Java program
+
+      - name: Run Java Program
+        run: java Login  # Run the compiled Java program
