@@ -1,23 +1,32 @@
-name: Run Java Login App
+name: Run Java GUI
 
-on: [push, pull_request]  # Run this workflow when you push code or create a pull request
+on: [push]
 
 jobs:
   run-java:
-    runs-on: ubuntu-latest  # Use an Ubuntu virtual machine
-    
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3  # Get the latest code from GitHub
+    runs-on: ubuntu-latest
 
-      - name: Set up Java
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'  # Install OpenJDK (Temurin)
-          java-version: '21'  # Use Java 17 (change this if needed)
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Install Xvfb
+        run: sudo apt-get install xvfb
+
+      - name: Start Virtual Display
+        run: Xvfb :99 &
+
+      - name: Set Display Environment
+        run: export DISPLAY=:99
 
       - name: Compile Java Code
-        run: javac Login.java  # Compile your Java program
+        run: javac Login.java
 
-      - name: Run Java Program
-        run: java Login  # Run the compiled Java program
+      - name: Run Java GUI Program
+        run: java Login
