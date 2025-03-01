@@ -14,7 +14,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'  # Install OpenJDK (Temurin)
-          java-version: '17'  # Use Java 17 (change this if needed)
+          java-version: '21'  # Use Java 17 (change this if needed)
 
       - name: Compile Java Code
         run: javac Login.java  # Compile your Java program
